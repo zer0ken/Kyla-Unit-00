@@ -1,29 +1,21 @@
-import os
-
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI, HarmBlockThreshold, HarmCategory
 
-if "GOOGLE_API_KEY" not in os.environ:
+from graph.graph import graph, stream_graph_updates
+
+if __name__ == '__main__':
     load_dotenv()
-
-llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash",
-    temperature=0.5,
-    max_tokens=None,
-    timeout=None,
-    max_retries=2,
-    safety_settings={
-        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-    }
-)
-
-messages = [
-    (
-        "system",
-        "You are a helpful assistant that can answer questions and help with tasks.",
-    ),
-    ("user", "What is the weather in Tokyo?"),
-]
-
-ai_msg = llm.invoke(messages)
-print(ai_msg.content)
+    
+    graph.get_graph().print_ascii()
+    
+    while True:
+        try:
+            user_input = input('User: ')
+            if user_input.lower() in ['exit', 'quit', 'q']:
+                print('Goodbye!')
+                break
+            stream_graph_updates(user_input)
+        except:
+            user_input = 'LangGraph가 뭔지 설명해줘.'
+            print(f'User: {user_input}')
+            stream_graph_updates(user_input)
+            break
