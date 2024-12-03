@@ -10,7 +10,7 @@ from graph.tool import tools
 
 llm = ChatGoogleGenerativeAI(
     model='gemini-1.5-flash',
-    temperature=1.0,
+    temperature=0.5,
     max_tokens=None,
     timeout=None,
     max_retries=2,

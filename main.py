@@ -11,14 +11,13 @@ if __name__ == '__main__':
     except Exception:
         pass
     
+    config = {"configurable": {"thread_id": "1"}}
+
     while True:
         try:
-            user_input = input('User: ')
+            user_input = input('\n>>> ')
             if user_input.lower() in ['exit', 'quit', 'q']:
-                print('Goodbye!')
                 break
-            stream_graph_updates(user_input)
+            stream_graph_updates(user_input, config)
         except:
-            stream_graph_updates('종료')
-            print('Goodbye!')
             break
