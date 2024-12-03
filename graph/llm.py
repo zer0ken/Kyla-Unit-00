@@ -31,5 +31,6 @@ llm = llm.bind_tools(tools)
 
 
 def chatbot(state: State) -> State:
+    # todo: 시스템 프롬프트를 같이 전달할 수 있도록 수정
     output = {'messages': [llm.invoke(state['messages'])]}
     return output
