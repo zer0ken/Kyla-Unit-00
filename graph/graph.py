@@ -1,8 +1,9 @@
 from langgraph.graph import StateGraph, START, END
+from langgraph.prebuilt import tools_condition
 
 from graph.llm import chatbot
 from graph.state import State
-from graph.tool import tool_node, route_tools
+from graph.tool import tool_node
 
 graph_builder = StateGraph(State)
 
@@ -12,9 +13,8 @@ graph_builder.add_node('tools', tool_node)
 graph_builder.add_edge(START, 'chatbot')
 graph_builder.add_edge('tools', 'chatbot')
 
-graph_builder.add_conditional_edges(
-    'chatbot', route_tools, {'tools': 'tools', END: END})
-    
+graph_builder.add_conditional_edges('chatbot', tools_condition)
+
 graph = graph_builder.compile()
 
 

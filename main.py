@@ -19,7 +19,6 @@ if __name__ == '__main__':
                 break
             stream_graph_updates(user_input)
         except:
-            user_input = 'LangGraph가 뭔지 설명해줘.'
-            print(f'User: {user_input}')
-            stream_graph_updates(user_input)
+            stream_graph_updates('종료')
+            print('Goodbye!')
             break
