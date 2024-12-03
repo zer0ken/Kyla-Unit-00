@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 from langchain_google_genai import (
     ChatGoogleGenerativeAI,
     HarmBlockThreshold,
@@ -6,7 +5,7 @@ from langchain_google_genai import (
 )
 
 from graph.state import State
-from graph.tool import tools
+from graph.nodes.tool import tools
 
 llm = ChatGoogleGenerativeAI(
     model='gemini-1.5-flash',

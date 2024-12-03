@@ -12,6 +12,7 @@ if __name__ == '__main__':
         pass
     
     config = {"configurable": {"thread_id": "1"}}
+    graph.update_state(config, {"messages": [("system", "You are a helpful assistant called '카일라'.")]})
 
     while True:
         try:
