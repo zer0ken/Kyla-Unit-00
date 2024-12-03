@@ -27,9 +27,9 @@ llm = ChatGoogleGenerativeAI(
         HarmCategory.HARM_CATEGORY_VIOLENCE: HarmBlockThreshold.BLOCK_NONE,
     },
 )
-llm.bind_tools(tools)
+llm = llm.bind_tools(tools)
+
 
 def chatbot(state: State) -> State:
     output = {'messages': [llm.invoke(state['messages'])]}
-    print(f'... {output}')
     return output

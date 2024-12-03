@@ -23,7 +23,7 @@ class BasicToolNode:
             )
             outputs.append(
                 ToolMessage(
-                    content=json.dumps(tool_result),
+                    content=json.dumps(tool_result, ensure_ascii=False),
                     name=tool_call['name'],
                     tool_call_id=tool_call['id'],
                 )
@@ -47,6 +47,8 @@ def route_tools(state: State) -> str:
         raise ValueError(f'No messages found in state to route to tool_edge: {state}')
     
     if hasattr(ai_message, 'tool_calls') and len(ai_message.tool_calls) > 0:
+        print('>>> route to tools')
         return 'tools'
     else:
+        print('>>> route to end')
         return END

@@ -10,10 +10,11 @@ graph_builder.add_node('chatbot', chatbot)
 graph_builder.add_node('tools', tool_node)
 
 graph_builder.add_edge(START, 'chatbot')
-graph_builder.add_edge('chatbot', END)
+graph_builder.add_edge('tools', 'chatbot')
 
-graph_builder.add_conditional_edges('chatbot', route_tools, {'tools': 'tools', END: END})
-
+graph_builder.add_conditional_edges(
+    'chatbot', route_tools, {'tools': 'tools', END: END})
+    
 graph = graph_builder.compile()
 
 

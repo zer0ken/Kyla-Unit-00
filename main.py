@@ -1,9 +1,9 @@
 from dotenv import load_dotenv
+load_dotenv()
 
 from graph.graph import graph, stream_graph_updates
 
 if __name__ == '__main__':
-    load_dotenv()
     
     graph.get_graph().print_ascii()
     
