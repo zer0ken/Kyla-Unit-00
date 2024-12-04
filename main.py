@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
+
+from graph.graph import MainGraph
 load_dotenv()
 
-from graph.graph import graph, stream_graph_updates
 
 if __name__ == '__main__':
     from IPython.display import Image
@@ -11,11 +12,15 @@ if __name__ == '__main__':
     except Exception:
         pass
 
+    graph = MainGraph()
+
     while True:
         try:
             user_input = input('\n>>> ')
             if user_input.lower() in ['exit', 'quit', 'q']:
                 break
-            stream_graph_updates('제로켄', user_input)
+            if not user_input:
+                continue
+            graph.stream_graph_updates('제로켄', user_input)
         except:
             break
