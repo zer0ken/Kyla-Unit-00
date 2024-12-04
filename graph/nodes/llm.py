@@ -5,11 +5,11 @@ from langchain_google_genai import (
 )
 
 from graph.state import State
-from graph.nodes.tool import tools
+from graph.tools import tools
 
 llm = ChatGoogleGenerativeAI(
     model='gemini-1.5-flash',
-    temperature=0.5,
+    temperature=0.3,
     max_tokens=None,
     timeout=None,
     max_retries=2,
