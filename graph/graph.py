@@ -3,7 +3,7 @@ from langgraph.prebuilt import tools_condition
 from langgraph.checkpoint.memory import MemorySaver
 
 from graph.state import State
-from graph.nodes.llm import chatbot
+from graph.llm import chatbot
 from graph.tools import tool_node
 
 graph_builder = StateGraph(State)
