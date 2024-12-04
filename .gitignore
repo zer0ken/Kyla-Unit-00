@@ -4,3 +4,4 @@
 .env
 __pycache__/
 *.py[cod]
+prompt/*.md

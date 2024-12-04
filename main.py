@@ -10,15 +10,12 @@ if __name__ == '__main__':
         open('graph.png', 'wb').write(graph_img.data)
     except Exception:
         pass
-    
-    config = {"configurable": {"thread_id": "1"}}
-    graph.update_state(config, {"messages": [("system", "You are a helpful assistant called '카일라'.")]})
 
     while True:
         try:
             user_input = input('\n>>> ')
             if user_input.lower() in ['exit', 'quit', 'q']:
                 break
-            stream_graph_updates(user_input, config)
+            stream_graph_updates('제로켄', user_input)
         except:
             break
