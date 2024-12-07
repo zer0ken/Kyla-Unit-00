@@ -2,15 +2,16 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 
+from kyla.utils import (
+    MainState,
+    get_available_tools,
+    ActionNode,
+    AgentNode,
+    route_from_agent
+)
 
-from graphs.graph_utils import stream
-from graphs.main_graph.nodes.action import ActionNode
-from graphs.main_graph.nodes.router import route_from_agent
-from graphs.main_graph.state import MainState
-from graphs.main_graph.tools import get_available_tools
-from graphs.main_graph.nodes.agent import AgentNode
-
-from prompts.load_prompt import load_prompt
+from utils.graph_utils import stream
+from prompts.prompt_loader import load_prompt
 
 
 class MainGraphHolder:
@@ -42,15 +43,12 @@ class MainGraphHolder:
         memory = MemorySaver()
         self.graph = graph_builder.compile(checkpointer=memory)
 
-
         system_message = SystemMessage(content=load_prompt('system'))
         system_message.pretty_print()
         self.graph.update_state(
             self.config,
             {
-                'instructions': [system_message],
-                'context': '',
-                'context_history': []
+                'instructions': [system_message]
             }
         )
 

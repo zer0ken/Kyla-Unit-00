@@ -13,9 +13,7 @@ async def stream(graph: StateGraph, inputs: dict, config: dict = None) -> None:
             metadata: dict = output[1]
             print(chunk.content, flush=True, end='')
         elif output_type == 'updates':
-            print('\n', flush=True)
             if 'chatbot' in output:
                 output['chatbot']['messages'][-1].pretty_print()
             elif 'tools' in output:
                 output['tools']['messages'][-1].pretty_print()
-            print('\n', flush=True)

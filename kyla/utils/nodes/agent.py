@@ -1,7 +1,10 @@
-from graphs.llm_generator import generate_llm
-from graphs.main_graph.state import MainState
-from graphs.main_graph.tools import get_available_tools
-from prompts.load_prompt import load_prompt
+from prompts.prompt_loader import load_prompt
+
+from kyla.utils.state import MainState
+from kyla.utils.tools import get_available_tools
+
+from utils import generate_llm
+
 
 class AgentNode:
     SYSTEM_INSTRUCTION = load_prompt('system')
@@ -9,7 +12,7 @@ class AgentNode:
     def __init__(self):
         self.llm = generate_llm()
         self.llm = self.llm.bind_tools(get_available_tools())
-    
+
     async def __call__(self, state: MainState) -> MainState:
         messages = state['messages']
         instructions = state['instructions']
@@ -20,4 +23,3 @@ class AgentNode:
 
     def get_system_message(self, state: MainState):
         return self.SYSTEM_INSTRUCTION.format(context=state['context'])
-

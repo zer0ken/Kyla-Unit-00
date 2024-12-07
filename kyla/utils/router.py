@@ -1,7 +1,7 @@
 from langchain_core.messages import AIMessage
 from langgraph.graph import END
 
-from graphs.main_graph.state import MainState
+from kyla.utils.state import MainState
 
 
 def route_from_agent(state: MainState) -> str:
