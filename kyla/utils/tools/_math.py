@@ -1,3 +1,4 @@
+from typing import Tuple, Union
 from langchain_core.tools import tool
 
 
@@ -38,7 +39,7 @@ def mul(a: int, b: int) -> int:
 
 
 @tool
-def div(a: int, b: int, div_and_mod: bool = False) -> int:
+def div(a: int, b: int, div_and_mod: bool = False) -> Union[int, Tuple[int, int]]:
     """
     첫 번째 수를 두 번째 수로 나눕니다.
 
@@ -52,4 +53,24 @@ def div(a: int, b: int, div_and_mod: bool = False) -> int:
     return a / b
 
 
-tools = [add, sub, mul, div] 
+@tool
+def pow(a: int, b: int) -> int:
+    """
+    첫 번째 수를 두 번째 수만큼 거듭제곱합니다.
+
+    Args:
+        a: 첫 번째 수
+        b: 두 번째 수
+    """
+    return a ** b
+
+
+@tool
+def round(a: float) -> int:
+    """
+    소수점을 반올림합니다.
+    """
+    return round(a)
+
+
+tools = [add, sub, mul, div, pow, round]
