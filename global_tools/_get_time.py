@@ -1,8 +1,9 @@
 from datetime import datetime
-
+from langchain_core.tools import tool
 awaken = datetime.now()
 
 
+@tool
 def get_time() -> dict:
     """
     프로그램의 시작 시간, 실행된 시간, 현재 시각을 반환합니다.

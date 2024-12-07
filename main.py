@@ -1,18 +1,20 @@
+import asyncio
+from IPython.display import Image
 from dotenv import load_dotenv
 
-from graph.graph import MainGraph
-load_dotenv()
+from graphs.main_graph.graph import MainGraphHolder
 
 
-if __name__ == '__main__':
-    graph = MainGraph()
+async def main():
+    load_dotenv()
 
-    from IPython.display import Image
+    graph_holder = MainGraphHolder()
+
     try:
-        graph_img = Image(graph.get_graph().draw_mermaid_png())
+        graph_img = Image(graph_holder.graph.get_graph().draw_mermaid_png())
         open('graph.png', 'wb').write(graph_img.data)
-    except Exception:
-        pass
+    except Exception as e:
+        print(e)
 
     while True:
         try:
@@ -21,6 +23,10 @@ if __name__ == '__main__':
                 break
             if not user_input:
                 continue
-            graph.stream_graph_updates('제로켄', user_input)
-        except:
+            await graph_holder.stream('제로켄', user_input)
+        except Exception as e:
+            print(e)
             break
+
+if __name__ == '__main__':
+    asyncio.run(main())
