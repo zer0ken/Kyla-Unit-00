@@ -3,14 +3,14 @@ from prompts.prompt_loader import load_prompt
 from kyla.utils.state import MainState
 from kyla.utils.tools import get_available_tools
 
-from utils import generate_llm
+from kyla.llm import global_llm
 
 
 class AgentNode:
     SYSTEM_INSTRUCTION = load_prompt('system')
 
     def __init__(self):
-        self.llm = generate_llm()
+        self.llm = global_llm
         self.llm = self.llm.bind_tools(get_available_tools())
 
     async def __call__(self, state: MainState) -> MainState:

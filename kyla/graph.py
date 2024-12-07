@@ -35,7 +35,7 @@ class MainGraphHolder:
             'agent',
             route_from_agent,
             {
-                'continue': 'action',
+                'tools': 'action',
                 'end': END
             }
         )

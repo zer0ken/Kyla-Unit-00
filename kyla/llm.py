@@ -1,5 +1,3 @@
-from langchain_groq import ChatGroq
-from langchain_together import ChatTogether
 from langchain_google_genai import (
     ChatGoogleGenerativeAI,
     HarmBlockThreshold,
@@ -7,8 +5,8 @@ from langchain_google_genai import (
 )
 
 
-def generate_llm(**kwargs):
-    default_kwargs = {
+global_llm = ChatGoogleGenerativeAI(
+    **{
         'model': 'gemini-1.5-flash',
         'temperature': 0.7,
         'max_tokens': None,
@@ -27,27 +25,4 @@ def generate_llm(**kwargs):
             HarmCategory.HARM_CATEGORY_VIOLENCE: HarmBlockThreshold.BLOCK_NONE,
         }
     }
-    return ChatGoogleGenerativeAI(
-        **{**default_kwargs, **kwargs}
-    )
-
-
-def generate_groq_llm(**kwargs):
-    default_kwargs = {
-        'model': 'llama3-8b-8192',
-        'temperature': 0.3,
-        'max_tokens': None,
-        'timeout': None,
-        'max_retries': 2,
-    }
-    return ChatGroq(
-        **{**default_kwargs, **kwargs}
-    )
-
-
-def generate_together_llm(**kwargs):
-    default_kwargs = {
-        'model': 'meta-llama/Meta-Llama-3.1-8B-Instruct',
-    }
-    return ChatTogether(**{**default_kwargs, **kwargs})
-
+)
