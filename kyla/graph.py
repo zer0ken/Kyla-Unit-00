@@ -11,7 +11,7 @@ from kyla.utils import (
 )
 
 from utils.graph_utils import stream
-from prompts.prompt_loader import load_prompt
+from kyla.prompts.prompt_loader import load_prompt
 
 
 class MainGraphHolder:

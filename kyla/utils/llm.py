@@ -4,6 +4,8 @@ from langchain_google_genai import (
     HarmCategory,
 )
 
+from kyla.utils.tools import get_available_tools
+
 
 global_llm = ChatGoogleGenerativeAI(
     **{
@@ -26,3 +28,4 @@ global_llm = ChatGoogleGenerativeAI(
         }
     }
 )
+global_llm.bind_tools(get_available_tools())

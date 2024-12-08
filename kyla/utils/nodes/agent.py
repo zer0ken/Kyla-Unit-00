@@ -1,9 +1,9 @@
-from prompts.prompt_loader import load_prompt
+from kyla.prompts.prompt_loader import load_prompt
 
 from kyla.utils.state import MainState
 from kyla.utils.tools import get_available_tools
 
-from kyla.llm import global_llm
+from kyla.utils.llm import global_llm
 
 
 class AgentNode:
