@@ -4,7 +4,7 @@ from langchain_google_genai import (
     HarmCategory,
 )
 
-from kyla.utils.tools import get_available_tools
+from src.kyla.tools import get_available_tools
 
 
 global_llm = ChatGoogleGenerativeAI(

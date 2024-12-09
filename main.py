@@ -2,7 +2,7 @@ import asyncio
 from IPython.display import Image
 from dotenv import load_dotenv
 
-from kyla.graph import MainGraphHolder
+from src.kyla.graph import MainGraphHolder
 
 
 async def main():

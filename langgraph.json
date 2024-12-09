@@ -1,0 +1,7 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "kyla": "./src/kyla/graph.py:graph"
+  },
+  "env": ".env"
+}

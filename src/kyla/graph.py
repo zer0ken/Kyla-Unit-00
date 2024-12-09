@@ -2,16 +2,16 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 
-from kyla.utils import (
-    MainState,
-    get_available_tools,
-    ActionNode,
+from src.kyla.nodes import (
     AgentNode,
-    route_from_agent
+    ActionNode
 )
+from src.kyla.state import MainState
+from src.kyla.tools import get_available_tools
+from src.kyla.router import route_from_agent
+from src.kyla.prompts.prompt_loader import load_prompt
 
-from utils.graph_utils import stream
-from kyla.prompts.prompt_loader import load_prompt
+from src.utils.graph_utils import stream
 
 
 class MainGraphHolder:
@@ -53,5 +53,11 @@ class MainGraphHolder:
         )
 
     async def stream(self, user_name: str, user_input: str) -> None:
-        inputs = {'messages': [HumanMessage(content=f'{user_name}: {user_input}')]}
+        inputs = {'messages': [HumanMessage(
+            content=f'{user_name}: {user_input}')]}
         await stream(self.graph, inputs, self.config)
+
+
+graph_holder = MainGraphHolder()
+
+graph = graph_holder.graph

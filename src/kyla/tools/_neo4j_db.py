@@ -2,7 +2,7 @@ from typing import Any, Optional
 from pydantic import BaseModel, Field
 from langchain_core.tools import tool
 
-from neo4j_ import Neo4jDBManager
+from src.neo4j_db import Neo4jDBManager
 
 neo4j_db = Neo4jDBManager()
 
@@ -36,10 +36,20 @@ class MemorizeObjectInput(BaseModel):
     )
 
 
-@tool(parse_docstring=False, args_schema=MemorizeObjectInput)
-def memorize_object(class_: str, name: str, additional_classes: list[str] = [], properties: dict[str, Any] = {}) -> str:
+@tool
+def memorize_object(class_: str, name: str, additional_classes: list[str] = []) -> str:
+    """
+    중요한 무언가를 기억하기 위해 일기를 적듯이 이 도구를 사용하세요.
+    이 도구는 요청을 받지 않더라도 원한다면 언제든지 스스로 판단하여 사용할 수 있습니다.
+    사물, 사람, 사건, 장소, 개념 등의 정보를 기억하기 위해 데이터베이스에 저장합니다.
+
+    Args:
+        class_: 기억할 대상의 종류. 파스칼 케이스로 작성하는 것이 권장됩니다. 예를 들어, 사물은 'Object', 사람(인격체)은 'Person', 사건은 'Event', 장소는 'Place', 개념은 'Concept'와 같은 문자열로 나타냅니다.
+        name: 기억할 대상의 이름(고유명). 한국어로 적을 것이 권장됩니다.
+        additional_classes: 기억할 대상의 추가 종류가 담긴 리스트.
+    """
     try:
-        neo4j_db.create_nodes([class_, *additional_classes], {'name': name, **properties})
+        neo4j_db.create_nodes([class_, *additional_classes], {'name': name})
     except Exception as e:
         return f"데이터베이스에 정보를 저장하는 데 실패했습니다. 오류 메시지: {e}"
 
