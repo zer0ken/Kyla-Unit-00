@@ -1,0 +1,67 @@
+[project]
+name = "Kyla Unit-00"
+version = "0.0.1"
+description = "Kyla Unit-00, multi-purpose AI agent."
+authors = [
+    { name = "zer0ken", email = "a37592777@gmail.com" },
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = [
+    "langchain~=0.3.8",
+    "langchain-community~=0.3.10",
+    "langchain-core~=0.3.22",
+    "langchain_chroma~0.1.4",
+    "langchain_google_genai~=2.0.6",
+    "langchain_huggingface~=0.1.2",
+    "langchain_neo4j~=0.1.1",
+    "langgraph~=0.2.6",
+    "python-dotenv~=1.0.1",
+    "langgraph_api~=0.0.6",
+    "neo4j~=5.27.0",
+    "trafilatura~=2.0.0",
+]
+
+
+[project.optional-dependencies]
+dev = ["mypy>=1.11.1", "ruff>=0.6.1"]
+
+[build-system]
+requires = ["setuptools>=73.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["kyla", "neo4j_db", "utils"]
+[tool.setuptools.package-dir]
+"kyla" = "src/kyla"
+"neo4j_db" = "src/neo4j_db"
+"utils" = "src/utils"
+
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.ruff]
+lint.select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # isort
+    "D",    # pydocstyle
+    "D401", # First line should be in imperative mood
+    "T201",
+    "UP",
+]
+lint.ignore = [
+    "UP006",
+    "UP007",
+    # We actually do want to import from typing_extensions
+    "UP035",
+    # Relax the convention by _not_ requiring documentation for every function parameter.
+    "D417",
+    "E501",
+]
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "UP"]
+[tool.ruff.lint.pydocstyle]
+convention = "google"
