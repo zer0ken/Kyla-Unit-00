@@ -12,7 +12,7 @@ def load_tools(package: str, *additional_packages: str) -> list:
         for file in os.listdir(dir):
             if not (not file.startswith("__") and file.startswith("_") and file.endswith(".py")):
                 continue
-                
+
             name = os.path.splitext(file)[0]
             module = importlib.import_module(f'{package_}.{name}')
             tools.extend(module.tools)

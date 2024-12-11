@@ -66,11 +66,11 @@ def pow(a: int, b: int) -> int:
 
 
 @tool
-def round(a: float) -> int:
+def round_to_int(a: float) -> int:
     """
     소수점을 반올림합니다.
     """
     return round(a)
 
 
-tools = [add, sub, mul, div, pow, round]
+tools = [add, sub, mul, div, pow, round_to_int]

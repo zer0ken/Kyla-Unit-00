@@ -166,3 +166,4 @@ uv.lock
 .vscode/
 **/prompts/*.md
 .scratch/
+.langgraph_api/
